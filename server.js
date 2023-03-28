@@ -39,9 +39,9 @@ app.use(cors());
 // Routes
 //___________________
 //localhost:3000
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello World!");
+// });
 
 app.get("/restaurants", (req, res) => {
   Restaurants.find({})
@@ -49,6 +49,24 @@ app.get("/restaurants", (req, res) => {
     .then((foundRestaurants) => {
       res.json(foundRestaurants);
     });
+});
+
+app.put("/restaurants/:id", (req, res) => {
+  Restaurants.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(
+    (updatedRestaurant) => res.json(updatedRestaurant)
+  );
+});
+
+app.post("/restaurants", (req, res) => {
+  Restaurants.create(req.body).then((createdRestaurant) => {
+    res.json(createdRestaurant);
+  });
+});
+
+app.delete("/restaurant/:id", (req, res) => {
+  Restaurants.findByIdAndDelete(req.params.id).then((deletedRestaurant) => {
+    res.json(deletedRestaurant);
+  });
 });
 
 //___________________
