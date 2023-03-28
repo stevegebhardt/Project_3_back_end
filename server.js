@@ -40,6 +40,8 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+app.get("/");
+
 //___________________
 //Listener
 //___________________
