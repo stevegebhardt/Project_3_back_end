@@ -4,6 +4,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const Restaurants = require("./modules/restaruants");
+const cors = require("cors");
 const db = mongoose.connection;
 require("dotenv").config();
 //___________________
@@ -32,6 +34,7 @@ app.use(express.static("public"));
 // populates req.body with parsed info from forms - if no data from forms will return an empty object {}
 app.use(express.urlencoded({ extended: false })); // extended: false - does not allow nested objects in query strings
 app.use(express.json()); // returns middleware that only parses JSON - may or may not need it depending on your project
+app.use(cors());
 //___________________
 // Routes
 //___________________
@@ -40,9 +43,19 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.get("/");
+app.get("/restaurants", (req, res) => {
+  Restaurants.find({})
+    .sort({ restName: 1 })
+    .then((foundRestaurants) => {
+      res.json(foundRestaurants);
+    });
+});
 
 //___________________
 //Listener
 //___________________
 app.listen(PORT, () => console.log("Listening on port:", PORT));
+
+mongoose.connection.once("open", () => {
+  console.log("connection with god established...");
+});
