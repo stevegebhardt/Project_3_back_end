@@ -1,0 +1,28 @@
+{
+  "name": "project_3_back_end",
+  "version": "1.0.0",
+  "engines": {
+    "node": "18.13.0"
+  },
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevegebhardt/Project_3_back_end.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevegebhardt/Project_3_back_end/issues"
+  },
+  "homepage": "https://github.com/stevegebhardt/Project_3_back_end#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3"
+  }
+}
