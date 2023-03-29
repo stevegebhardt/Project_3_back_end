@@ -63,7 +63,7 @@ app.post("/restaurants", (req, res) => {
   });
 });
 
-app.delete("/restaurant/:id", (req, res) => {
+app.delete("/restaurants/:id", (req, res) => {
   Restaurants.findByIdAndDelete(req.params.id).then((deletedRestaurant) => {
     res.json(deletedRestaurant);
   });
