@@ -43,31 +43,43 @@ app.use(cors());
 //   res.send("Hello World!");
 // });
 
-app.get("/restaurants", (req, res) => {
-  Restaurants.find({})
-    .sort({ restName: 1 })
-    .then((foundRestaurants) => {
-      res.json(foundRestaurants);
+app.get(
+  "https://git.heroku.com/projec3-back-end.git/restaurants",
+  (req, res) => {
+    Restaurants.find({})
+      .sort({ restName: 1 })
+      .then((foundRestaurants) => {
+        res.json(foundRestaurants);
+      });
+  }
+);
+
+app.put(
+  "https://git.heroku.com/projec3-back-end.git/restaurants/:id",
+  (req, res) => {
+    Restaurants.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(
+      (updatedRestaurant) => res.json(updatedRestaurant)
+    );
+  }
+);
+
+app.post(
+  "https://git.heroku.com/projec3-back-end.git/restaurants",
+  (req, res) => {
+    Restaurants.create(req.body).then((createdRestaurant) => {
+      res.json(createdRestaurant);
     });
-});
+  }
+);
 
-app.put("/restaurants/:id", (req, res) => {
-  Restaurants.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(
-    (updatedRestaurant) => res.json(updatedRestaurant)
-  );
-});
-
-app.post("/restaurants", (req, res) => {
-  Restaurants.create(req.body).then((createdRestaurant) => {
-    res.json(createdRestaurant);
-  });
-});
-
-app.delete("/restaurants/:id", (req, res) => {
-  Restaurants.findByIdAndDelete(req.params.id).then((deletedRestaurant) => {
-    res.json(deletedRestaurant);
-  });
-});
+app.delete(
+  "https://git.heroku.com/projec3-back-end.git/restaurants/:id",
+  (req, res) => {
+    Restaurants.findByIdAndDelete(req.params.id).then((deletedRestaurant) => {
+      res.json(deletedRestaurant);
+    });
+  }
+);
 
 //___________________
 //Listener
